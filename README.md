@@ -7,7 +7,6 @@
     - Ingénierie de caractéristiques;
     - Choix des modèles;
     - Entrainement des modèles;
-    - 
 1. Création de l'API
 1. Architecture de l'application Web
 
