@@ -1,5 +1,5 @@
 from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline, make_pipeline
+from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
@@ -10,17 +10,17 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
         from sklearn.impute import SimpleImputer
         from sklearn.preprocessing import StandardScaler, OneHotEncoder
 """
-def pipeline_create(dataset, X_train, model):  
+def pipeline_create(X_train, estimator): 
 
     
-    def separate_column_types(df):
+    def separate_column_types():
 
         numerical_cols = X_train.select_dtypes(include=['int64', 'float64']).columns.tolist()
         categorical_cols = X_train.select_dtypes(include=['object']).columns.tolist()
 
         return numerical_cols, categorical_cols
 
-    numerical_cols, categorical_cols = separate_column_types(dataset)
+    numerical_cols, categorical_cols = separate_column_types()
 
     num_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
@@ -40,5 +40,10 @@ def pipeline_create(dataset, X_train, model):
             ('cat', cat_pipeline, categorical_cols),
         ])
 
-    full_pipeline = make_pipeline(preprocessor, model)
+    # Création du pipeline final avec un nom pour l'étape ElasticNet
+    full_pipeline = Pipeline([
+        ('preprocessor', preprocessor),
+        ('elasticnet', estimator)
+    ])
+
     return full_pipeline
