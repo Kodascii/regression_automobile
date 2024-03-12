@@ -1,3 +1,8 @@
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline, make_pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+
 """ Pour Utiliser cette function mettre 'from pipeline import pipeline_create'
     cettre function à aussi besoin de ces libraries:
         from sklearn.compose import ColumnTransformer
