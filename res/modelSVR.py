@@ -23,17 +23,19 @@ y = dataset['Price']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 
-param_grid = {
-    'svr__C': [0.1],
-    'svr__gamma': ['scale'],
-    'svr__kernel': ['rbf']
-    }
-
 # param_grid = {
-#     'svr__C': [0.1, 1, 10],
-#     'svr__gamma': ['scale','auto'],
-#     'svr__kernel': ['rbf', 'linear']
+#     'svr__C': [0.1],
+#     'svr__gamma': ['scale'],
+#     'svr__kernel': ['rbf']
 #     }
+
+param_grid = {
+    'svr__C': [1, 10, 100],
+    'svr__gamma': ['scale','auto'],
+    'svr__kernel': ['rbf', 'linear', 'poly'],
+    'svr__epsilon' : [0.1, 0.2, 0.3],
+        
+}
 
 full_pipeline = pipeline_create(X_train, model)
 
@@ -44,18 +46,15 @@ full_pipeline.fit(X_train, y_train)
 
 y_pred = full_pipeline.predict(X_test)
 
-mse = mean_squared_error(y_test, y_pred)
-rmse = np.sqrt(mse)
-r2 = r2_score(y_test, y_pred)
 
 
-# kf = KFold(n_splits=10, shuffle=True, random_state=42)
+kf = KFold(n_splits=2, shuffle=True, random_state=42)
 
 mse_scores = []
 rmse_scores = []
 r2_scores = []
 
-"""for train_index, test_index in kf.split(X):
+for train_index, test_index in kf.split(X):
     X_train_kf, X_test_kf = X.iloc[train_index], X.iloc[test_index]
     y_train_kf, y_test_kf = y.iloc[train_index], y.iloc[test_index]  # Use iloc here as well
 
@@ -74,12 +73,11 @@ r2_scores = []
     mse_scores.append(mse)
     rmse_scores.append(rmse)
     r2_scores.append(r2)
-"""
 
-mse_scores.append(mse)
-rmse_scores.append(rmse)
-r2_scores.append(r2)
 
+r2score = np.mean(r2_scores)
+rmsescore = np.mean(rmse_scores)
+msescore = np.mean(mse_scores)
 
 print(f"Average R2 score across folds: {np.mean(r2_scores)}")
 print(f"Average Root Mean Squared Error across folds: {np.mean(rmse_scores)}")
