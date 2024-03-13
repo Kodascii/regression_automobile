@@ -34,15 +34,9 @@ full_pipeline = pipeline_create(X_train, model)
 full_pipeline = GridSearchCV(full_pipeline, param_grid, cv=5, verbose=1)
 
 
-dataset_test = pd.read_csv('res/clean_train.csv')
-
-
-dataset_test = dataset_test.drop('New_Price', axis=1)
-
-
 full_pipeline.fit(X_train, y_train)
 
-y_pred = full_pipeline.predict(dataset_test)
+y_pred = full_pipeline.predict(dataset)
 y = y.reset_index(drop=True)
 
 mse = mean_squared_error(y_test, y_pred)
