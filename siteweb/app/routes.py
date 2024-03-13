@@ -6,7 +6,7 @@ from sqlalchemy.sql.expression import func
 import random
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
-from app.models import User, Transaction, Client
+from app.models import User
 import numpy as np 
 
 

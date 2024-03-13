@@ -29,38 +29,4 @@ class User(UserMixin, db.Model):
 def load_user(id):
     return db.session.get(User, int(id))
     
-
-class Client(db.Model):
-    id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    
-    name: so.Mapped[str] = so.mapped_column(sa.String(64))
-    
-    oldBalance: so.Mapped[int] = so.mapped_column(sa.Integer())
-    
-    newBalance: so.Mapped[int] = so.mapped_column(sa.Integer())
-    
-    def __repr__(self):
-        return '<Client {}>'.format(self.body)
-
-class Transaction(db.Model):
-    id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    
-    name: so.Mapped[str] = so.mapped_column(sa.String(64))
-    
-    step: so.Mapped[int] = so.mapped_column(sa.Integer())
-    
-    type: so.Mapped[int] = so.mapped_column(sa.Integer())
-    
-    amount: so.Mapped[int] = so.mapped_column(sa.Integer())
-    
-    isFraud: so.Mapped[bool] = so.mapped_column(sa.Boolean())
-    
-    id_client_destinaire: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Client.id), index=True)
-    
-    id_client_originaire: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Client.id), index=True)
-
-
-    def __repr__(self):
-        return '<Transaction {}>'.format(self.body)
-    
     

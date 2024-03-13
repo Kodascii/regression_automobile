@@ -24,10 +24,16 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 
 param_grid = {
-    'svr__C': [0.1, 1, 10, 100],
-    'svr__gamma': ['scale','auto'],
-    'svr__kernel': ['rbf', 'linear']
+    'svr__C': [0.1],
+    'svr__gamma': ['scale'],
+    'svr__kernel': ['rbf']
     }
+
+# param_grid = {
+#     'svr__C': [0.1, 1, 10],
+#     'svr__gamma': ['scale','auto'],
+#     'svr__kernel': ['rbf', 'linear']
+#     }
 
 full_pipeline = pipeline_create(X_train, model)
 
@@ -36,8 +42,7 @@ full_pipeline = GridSearchCV(full_pipeline, param_grid, cv=5, verbose=1)
 
 full_pipeline.fit(X_train, y_train)
 
-y_pred = full_pipeline.predict(dataset)
-y = y.reset_index(drop=True)
+y_pred = full_pipeline.predict(X_test)
 
 mse = mean_squared_error(y_test, y_pred)
 rmse = np.sqrt(mse)
@@ -79,3 +84,11 @@ r2_scores.append(r2)
 print(f"Average R2 score across folds: {np.mean(r2_scores)}")
 print(f"Average Root Mean Squared Error across folds: {np.mean(rmse_scores)}")
 print(f"Average Mean Squared Error across folds: {np.mean(mse_scores)}")
+
+
+test_df = pd.read_csv('res/clean_test.csv')
+
+
+predictions = full_pipeline.predict(test_df)
+
+print(predictions)
