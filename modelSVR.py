@@ -7,19 +7,15 @@ import pandas as pd
 import numpy as np
 
 
-from res.csv_cleaner_ import clean_mileage_engine_power_
 from pipeline import pipeline_create
 
 model  = SVR()
-# model = ElasticNet()
 
-dataset = pd.read_csv('res/train.csv')
+dataset = pd.read_csv('res/clean_train.csv')
 
-dataset = clean_mileage_engine_power_(dataset)
-
-print(dataset.head())
 
 dataset = dataset.drop('New_Price', axis=1)
+
 
 X = dataset.drop('Price', axis=1)
 y = dataset['Price']
@@ -28,25 +24,25 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 
 param_grid = {
-    'C': [0.1, 1, 10, 100], 
-    'gamma': ['scale','auto'], 
-    'kernel': ['rbf', 'linear']
+    'svr__C': [0.1, 1, 10, 100],
+    'svr__gamma': ['scale','auto'],
+    'svr__kernel': ['rbf', 'linear']
     }
 
-# param_grid = {
-#     'alpha': [0.1, 1, 10],
-#     'l1_ratio': [0.1, 0.5, 0.9],
-#     'max_iter': [1000, 5000, 10000]
-# }
+full_pipeline = pipeline_create(X_train, model)
 
-model = GridSearchCV(model, param_grid, cv=5, verbose=1)
+full_pipeline = GridSearchCV(full_pipeline, param_grid, cv=5, verbose=1)
 
 
-full_pipeline = pipeline_create(dataset, X_train, model)
+dataset_test = pd.read_csv('res/clean_train.csv')
+
+
+dataset_test = dataset_test.drop('New_Price', axis=1)
+
 
 full_pipeline.fit(X_train, y_train)
 
-y_pred = full_pipeline.predict(X_test)
+y_pred = full_pipeline.predict(dataset_test)
 y = y.reset_index(drop=True)
 
 mse = mean_squared_error(y_test, y_pred)
@@ -63,18 +59,18 @@ r2_scores = []
 """for train_index, test_index in kf.split(X):
     X_train_kf, X_test_kf = X.iloc[train_index], X.iloc[test_index]
     y_train_kf, y_test_kf = y.iloc[train_index], y.iloc[test_index]  # Use iloc here as well
-    
+
     # Fit the pipeline to the training data
     full_pipeline.fit(X_train_kf, y_train_kf)
-    
+
     # Predict on the testing set
     y_pred_kf = full_pipeline.predict(X_test_kf)
-    
+
     # Calculate metrics
     mse = mean_squared_error(y_test_kf, y_pred_kf)
     rmse = np.sqrt(mse)
     r2 = r2_score(y_test_kf, y_pred_kf)
-    
+
     # Append to lists
     mse_scores.append(mse)
     rmse_scores.append(rmse)
