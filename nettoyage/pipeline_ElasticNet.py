@@ -2,14 +2,10 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.feature_selection import RFECV
 
-""" Pour Utiliser cette function mettre 'from pipeline import pipeline_create'
-    cettre function à aussi besoin de ces libraries:
-        from sklearn.compose import ColumnTransformer
-        from sklearn.pipeline import Pipeline, make_pipeline
-        from sklearn.impute import SimpleImputer
-        from sklearn.preprocessing import StandardScaler, OneHotEncoder
-"""
+# Pour Utiliser cette function mettre 'from pipeline import pipeline_create'
+
 def pipeline_create(X_train, estimator): 
 
     
@@ -39,11 +35,13 @@ def pipeline_create(X_train, estimator):
             ('num', num_pipeline, numerical_cols),
             ('cat', cat_pipeline, categorical_cols),
         ])
+    
+    rfecv = RFECV(estimator=estimator, step=1, cv=5, scoring='neg_mean_squared_error', min_features_to_select=1)
 
     # Création du pipeline final avec un nom pour l'étape ElasticNet
-    full_pipeline = Pipeline([
+    full_pipeline_elasticnet = Pipeline([
         ('preprocessor', preprocessor),
-        ('elasticnet', estimator)
+        ('rfecv', rfecv)
     ])
 
-    return full_pipeline
+    return full_pipeline_elasticnet
