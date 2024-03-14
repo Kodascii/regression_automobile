@@ -8,14 +8,14 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 def pipeline_create(X_train, estimator): 
 
     
-    def separate_column_types():
+    def separate_column_types(X_train):
 
         numerical_cols = X_train.select_dtypes(include=['int64', 'float64']).columns.tolist()
         categorical_cols = X_train.select_dtypes(include=['object']).columns.tolist()
 
         return numerical_cols, categorical_cols
 
-    numerical_cols, categorical_cols = separate_column_types()
+    numerical_cols, categorical_cols = separate_column_types(X_train)
 
     num_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
