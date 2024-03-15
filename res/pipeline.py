@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 def pipeline_create(X_train, model):  
 
     numerical_cols = X_train.select_dtypes(include=['int64', 'float64']).columns.tolist()
-    categorical_cols = X_train.select_dtypes(include=['object']).columns.tolist()
+    categorical_cols = X_train.select_dtypes(include=['object', 'bool']).columns.tolist()
 
 
     num_pipeline = Pipeline([
