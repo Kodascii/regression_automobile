@@ -1,6 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Hi, {{ current_user.username }}!</h1>
+<div class="blog-div">
+    <div class="blog-card">
+        <div class="meta">
+        <div class="photo" style="background-image: url(./static/images/accueil_cars.jpg)"></div>
+        
+        </div>
+        <div class="description">
+        <h1>We'll estimate your car</h1>
+        <h2>Free estimation here</h2>
+        <p> Our Algorithmns will estimate any and all cars, get a fast estimate of what your automobile is worth regardless of the age, mileage
+            or fuel type! Just answer a few questions about your car. No personal info needed. </p>
+        <p class="read-more">
+            <a href="#">Estimate Here</a>
+        </p>
+        </div>
+    </div>
+    <div class="blog-card alt">
+        <div class="meta">
+        <div class="photo" style="background-image: url(./static/images/used_cars.webp)"></div>
+        
+        </div>
+        <div class="description">
+        <h1>View Our Selection of Used Cars</h1>
+        <h2>a large collection of models</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
+        <p class="read-more">
+            <a href="#">Read More</a>
+        </p>
+        </div>
+    </div>
+</div>
     
 {% endblock %}

@@ -15,7 +15,9 @@ class User(UserMixin, db.Model):
                                              unique=True)
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
     
+    isAdmin: so.Mapped[bool] = so.mapped_column(sa.Boolean(), default=False)
 
+    
     def __repr__(self):
         return '<User {}>'.format(self.username)
 

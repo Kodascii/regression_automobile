@@ -17,6 +17,12 @@ def accueil():
     return render_template('index.html', title='Accueil')
 
 
+@app.route('/stats')
+@login_required
+def stats():   
+    return render_template('stats.html', title='Statistics')
+
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
