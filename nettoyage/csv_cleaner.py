@@ -3,9 +3,8 @@ import pandas as pd
 import numpy as np
 
 
-data_train = pd.read_csv('../res/train.csv')
-data_test = pd.read_csv('../res/test.csv')
 default_info2del = ['(diesel)', '(petrol)', '(at)', 'diesel', 'petrol', 'at', 'tdi', 'mt']
+
 
 def format_brand_name(str):
     if str == 'Land':
@@ -89,7 +88,7 @@ def clean_model(df, desired_unrelated):
     return df
 
 def clean_mileage(mileage):
-    if pd.isna(mileage):  # Gérer les valeurs NaN
+    if pd.isna(mileage):
         return np.nan
     num, unit = mileage.split(' ')[0], mileage.split(' ')[1]
     num = float(num)
@@ -137,21 +136,23 @@ def fillnans(df, cols):
             df[col] = df[col].fillna(df[col].mode()[0])
     return df
 
-def drop_outliers(df):
-    # Calcul de la moyenne
-    mean_price = df['Price'].mean()
-    # Calcul de l'écart-type
-    std_price = df['Price'].std()
-    # Calcul du Z-score pour chaque observation dans la colonne 'Price'
-    z_score = (df['Price'] - mean_price) / std_price
-    # Supprimer les lignes contenant des valeurs aberrantes
-    return df[abs(z_score) <= 3]
+def drop_outliers(df, columns:list):
+    for col in columns:
+        # Calcul de la moyenne
+        mean_price = df[col].mean()
+        # Calcul de l'écart-type
+        std_price = df[col].std()
+        # Calcul du Z-score pour chaque observation dans la colonne 'Price'
+        z_score = (df[col] - mean_price) / std_price
+        # Supprimer les lignes contenant des valeurs aberrantes
+        df = df[abs(z_score) <= 3]
+
+    return df
 
 
 def clean_df(df):
     df = split_name(df.copy())
-    df.drop('Model', axis=1, inplace=True)
-    df.drop(columns=['Seats'], axis=1, inplace=True)
+    df.drop(columns=['Model', 'Seats'], axis=1, inplace=True)
     #words_occ = calc_words_occ(df['Model'])
     #words_occ = split_desired_unrelated(words_occ, unrelated_occ, default_info2del)
     #df = clean_model(df, words_occ)
@@ -161,10 +162,7 @@ def clean_df(df):
     df['Power'] = df['Power'].apply(clean_power)
     df['New_Price'] = df['New_Price'].apply(clean_new_price)
     # if target: df['Price'] = df['Price'].apply(clean_price)
-    df = drop_outliers(df)
+    df = drop_outliers(df, ['Kilometers_Driven', 'Mileage', 'Engine', 'Power', 'Price'])
     fillnans(df, ['Mileage', 'Engine', 'Power'])
 
     return df
-
-# clean_train = clean_csv(data_train)
-# clean_train.to_csv('clean_train.csv', index=False)
