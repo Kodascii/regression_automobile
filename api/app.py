@@ -1,18 +1,96 @@
-from fastapi import FastAPI
+from typing import Union
+
+from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from pydantic import BaseModel
+from typing_extensions import Annotated
+from pickle import loads
+from api_db import *
+
 
 app = FastAPI()
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-# Define a simple endpoint
-@app.get("/")
-def read_root():
-    return {"message": "Hello, World!"}
+def fake_hash_password(password: str):
+    return "fakehashed_" + password
 
-# Define an endpoint with path parameters
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+class User(BaseModel):
+    username: str
+    email: Union[str, None] = None
+    full_name: Union[str, None] = None
+    disabled: Union[bool, None] = None
 
-# Define an endpoint that accepts POST requests
-@app.post("/items/")
-def create_item(item: dict):
-    return item
+class UserInDB(User):
+    hashed_password: str
+
+
+class VehicleModel(BaseModel):
+    brand:str
+    model:str
+    year:int
+    kilometers_driven:int
+    fuel_type:str
+    transmission:str
+    owner_type:str
+    mileage:float
+    engine:int
+    power:float
+    seats:int
+    new_price:int
+
+def get_user(db, username: str):
+    if username in db:
+        user_dict = db[username]
+        return UserInDB(**user_dict)
+
+def fake_decode_token(token):
+    # This doesn't provide any security at all
+    user = get_user(users_db, token)
+    return user
+
+async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
+    user = fake_decode_token(token)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid authentication credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    return user
+
+
+async def get_current_active_user(
+    current_user: Annotated[User, Depends(get_current_user)]
+):
+    if current_user.disabled:
+        raise HTTPException(status_code=400, detail="Inactive user")
+    return current_user
+
+
+@app.post("/token")
+async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
+    user_dict = users_db.get(form_data.username)
+    if not user_dict:
+        raise HTTPException(status_code=400, detail="Incorrect username or password")
+    user = UserInDB(**user_dict)
+    hashed_password = fake_hash_password(form_data.password)
+    if not hashed_password == user.hashed_password:
+        raise HTTPException(status_code=400, detail="Incorrect username or password")
+
+    return {"access_token": user.username, "token_type": "bearer"}
+
+@app.get("/users/me")
+async def read_users_me(
+    current_user: Annotated[User, Depends(get_current_active_user)]
+):
+    return current_user
+
+@app.get("/items/")
+async def read_items(token: Annotated[str, Depends(oauth2_scheme)]):
+    return {"token": token}
+
+@app.get('/prediction')
+def predict(token: Annotated[str, Depends(oauth2_scheme)], brand:str, model:str, year:int, kilometers_driven:int, fuel_type:str, transmission:str, owner_type:str, mileage:float, engine:int, power:float, seats:int, new_price:int):
+    
+
+    return { 'predicted_price': 100 }
