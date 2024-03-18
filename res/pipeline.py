@@ -28,6 +28,17 @@ def pipeline_create(X_train, model):
             ('num', num_pipeline, numerical_cols),
             ('cat', cat_pipeline, categorical_cols),
         ])
+    
+    model_name = model.__name__.lower()
+    
+    
+    # if model_name == "gradientboostingregressor" or "svr":
+    #       full_pipeline = Pipeline([
+    #           ('preprocessor', preprocessor),
+    #           (f'{model_name}', model)
+    #           ])
+    
+  
 
     full_pipeline = make_pipeline(preprocessor, model)
     return full_pipeline
