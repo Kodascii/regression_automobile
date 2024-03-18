@@ -11,22 +11,17 @@ from api_db import *
 app = FastAPI()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-def fake_hash_password(password: str):
-    return "fakehashed_" + password
 
 class User(BaseModel):
     username: str
-    email: Union[str, None] = None
-    full_name: Union[str, None] = None
     disabled: Union[bool, None] = None
 
 class UserInDB(User):
     hashed_password: str
 
-
 class VehicleModel(BaseModel):
     brand:str
-    model:str
+    # model:str
     year:int
     kilometers_driven:int
     fuel_type:str
@@ -35,13 +30,17 @@ class VehicleModel(BaseModel):
     mileage:float
     engine:int
     power:float
-    seats:int
+    # seats:int
     new_price:int
+
 
 def get_user(db, username: str):
     if username in db:
         user_dict = db[username]
         return UserInDB(**user_dict)
+
+def fake_hash_password(password: str):
+    return "fakehashed_" + password
 
 def fake_decode_token(token):
     # This doesn't provide any security at all
@@ -57,7 +56,6 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
             headers={"WWW-Authenticate": "Bearer"},
         )
     return user
-
 
 async def get_current_active_user(
     current_user: Annotated[User, Depends(get_current_user)]
@@ -79,18 +77,9 @@ async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
 
     return {"access_token": user.username, "token_type": "bearer"}
 
-@app.get("/users/me")
-async def read_users_me(
-    current_user: Annotated[User, Depends(get_current_active_user)]
-):
-    return current_user
-
-@app.get("/items/")
-async def read_items(token: Annotated[str, Depends(oauth2_scheme)]):
-    return {"token": token}
 
 @app.get('/prediction')
-def predict(token: Annotated[str, Depends(oauth2_scheme)], brand:str, model:str, year:int, kilometers_driven:int, fuel_type:str, transmission:str, owner_type:str, mileage:float, engine:int, power:float, seats:int, new_price:int):
+def predict(token: Annotated[str, Depends(get_current_active_user)], specs:VehicleModel):
     
 
     return { 'predicted_price': 100 }

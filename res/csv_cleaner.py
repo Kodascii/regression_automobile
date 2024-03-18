@@ -137,13 +137,13 @@ def fillnans(df, cols):
             df[col] = df[col].fillna(df[col].mode()[0])
     return df
 
-def drop_outliers(df):
+def drop_outliers(df, on_column:str):
     # Calcul de la moyenne
-    mean_price = df['Price'].mean()
+    mean_price = df[on_column].mean()
     # Calcul de l'écart-type
-    std_price = df['Price'].std()
+    std_price = df[on_column].std()
     # Calcul du Z-score pour chaque observation dans la colonne 'Price'
-    z_score = (df['Price'] - mean_price) / std_price
+    z_score = (df[on_column] - mean_price) / std_price
     # Supprimer les lignes contenant des valeurs aberrantes
     return df[abs(z_score) <= 3]
 
@@ -162,7 +162,11 @@ def clean_df(df):
     df['New_Price'] = df['New_Price'].apply(clean_new_price)
     # if target: df['Price'] = df['Price'].apply(clean_price)
     fillnans(df, ['Mileage', 'Engine', 'Power'])
-    df = drop_outliers(df)
+    df = drop_outliers(df, 'Kilometers_Driven')
+    df = drop_outliers(df, 'Mileage')
+    df = drop_outliers(df, 'Engine')
+    df = drop_outliers(df, 'Power')
+    df = drop_outliers(df, 'Price')
 
     return df
 
