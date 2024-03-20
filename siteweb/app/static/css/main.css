@@ -69,9 +69,7 @@ body {
   font-family: "Titillium Web", sans-serif;
 }
 
-a {
-  text-decoration: none;
-}
+
 a .selectA {
   color: #303030;
 }
@@ -139,33 +137,55 @@ a:hover .loginA {
   font-size: 3em;
 }
 
-label {
-  position: absolute;
+.grouped-fields {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+
+}
+.grouped-fields .field-wrap {
+  width: 100%
+}
+.field-wrap select {
+  background-color: #4F6877;
+  display: block;
+  padding: 8px 20px 5px 10px;
+  min-height: 25px;
+  line-height: 24px;
+  overflow: hidden;
+  border: 0;
+  width: 100%;
+  color:  #ffff;
+}
+
+.field-wrap label {
+  /* position: absolute; */
   transform: translateY(6px);
   left: 13px;
-  color: rgba(255, 255, 255, 0.5); /* $white with opacity */
+  color: #ffffff80; /* $white with opacity */
   transition: all 0.25s ease;
   pointer-events: none;
   font-size: 22px;
 }
-label .req {
+.field-wrap label.req {
   margin: 2px;
   color: #1ab188; /* $main */
 }
 
-label.active {
+.field-wrap label.active {
   transform: translateY(50px);
   left: 2px;
   font-size: 14px;
 }
 
 
-label.highlight {
+.field-wrap label.highlight {
   color: #ffffff; /* $white */
+  
 }
 
-input,
-textarea {
+.field-wrap input,
+.field-wrap textarea {
   font-size: 22px;
   display: block;
   width: 100%;
@@ -178,13 +198,15 @@ textarea {
   border-radius: 0;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
-input:focus,
-textarea:focus {
+.field-wrap input:focus,
+.field-wrap textarea:focus {
   outline: 0;
   border-color: #1ab188; /* $main */
+  
 }
 
-textarea {
+
+.field-wrap textarea {
   border: 2px solid #a0b3b0; /* $gray-light */
   resize: vertical;
 }
@@ -246,3 +268,150 @@ textarea {
     margin-bottom: 1rem;
   }
 
+
+.categoryItem {
+    display: none;
+}
+.byyear {
+    display: none;
+}
+.itemButtons {
+    display: none;
+}
+
+.frame {
+  width: 90%;
+  margin: 40px auto;
+  text-align: center;
+}
+.custom-btn-item {
+  width: 140px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.custom-btn-cat {
+  width: 150px;
+  height: 45px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+/* 11 */
+.btn-11 {
+  border: none;
+  background: #1a364ae6;
+    background: linear-gradient(0deg, #1a364ae6, #2f5b7ae6);
+    color: #fff;
+    overflow: hidden;
+}
+.btn-11:hover {
+    text-decoration: none;
+    color: #fff;
+}
+.btn-11:before {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    top: -180px;
+    left: 0;
+    width: 30px;
+    height: 100%;
+    background-color: #fff;
+    animation: shiny-btn1 3s ease-in-out infinite;
+}
+.btn-11:hover{
+  opacity: .7;
+}
+.btn-11:active{
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+}
+
+@-webkit-keyframes shiny-btn1 {
+  0% { -webkit-transform: scale(0) rotate(45deg); opacity: 0; }
+  80% { -webkit-transform: scale(0) rotate(45deg); opacity: 0.5; }
+  81% { -webkit-transform: scale(4) rotate(45deg); opacity: 1; }
+  100% { -webkit-transform: scale(50) rotate(45deg); opacity: 0; }
+}
+
+
+.categoryFrame {
+  display: flex;
+  justify-content: center; /* Centers items horizontally */
+  align-items: center; /* Centers items vertically */
+}
+
+/* To ensure the categoryFrame takes up full height, you might need to ensure body and html tags are also set to take full height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.frame, .categoryFrame {
+  width: 100%; /* Full width */
+  text-align: center; /* Center align the text and any inline elements */
+}
+
+
+
+/* Additional styling to make the buttons and items inside categoryFrame visually centered */
+.itemButtons {
+  justify-content: center; /* Centers the item buttons if you decide to make it a flex container */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Adds some space between the buttons */
+}
+
+.categoryItem {
+  display: none; /* Start with all items hidden */
+}
+
+.category {
+  display: none; /* Hide categories by default, shown by script */
+}
+
+
+.joke-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+
+.joke-image {
+  width: 80vw;
+  min-height: 100%;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative; 
+  top: 0;
+  left: 0;
+}

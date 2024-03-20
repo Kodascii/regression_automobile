@@ -2,4 +2,49 @@
 
 {% block content %}
 
+<div class="frame">
+    <button class="categoryButton custom-btn-cat btn-11" data-target-category="byprice">Par Prix</button>
+    <button class="categoryButton custom-btn-cat btn-11" data-target-category="byyear">Par Anne</button>
+
+    <div class="itemButtons bypriceButtons">
+        <button class="itemButton custom-btn-item btn-11" data-target-item="Fuel X Price">Par Carburant</button>
+        <button class="itemButton custom-btn-item btn-11" data-target-item="Year X Price">Par Anne</button>
+        <button class="itemButton custom-btn-item btn-11" data-target-item="Name X Price">Par Marque</button>
+    </div>
+
+    <div class="itemButtons byyearButtons">
+        <button class="itemButton custom-btn-item btn-11" data-target-item="Fuel X Year">Par Carburant</button>
+        <button class="itemButton custom-btn-item btn-11" data-target-item="Name X Year">Par Marque</button>
+    </div>
+</div>
+
+
+<div class="categoryFrame">
+    <div class="byprice category" data-category-name="Price Category">
+        <div class="categoryItem" data-item-name="Fuel X Price">
+            {% include "fuelXprice_plot.html" %}
+        </div>
+        <div class="categoryItem" data-item-name="Year X Price">
+            {% include "anneXprice_plot.html" %}
+        </div>
+        <div class="categoryItem" data-item-name="Name X Price">
+            {% include "nameXprice_plot.html" %}
+            
+        </div>
+    </div>
+    <div class="byyear category" data-category-name="Year Category">
+        <div class="categoryItem" data-item-name="Fuel X Year">
+            {% include "fuelXanne_plot.html" %}
+        </div>
+        <div class="categoryItem" data-item-name="Name X Year">
+            {% include "nameXanne_plot.html" %}
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="static/js/stats.js" charset="utf-8"></script>
+   
 {% endblock %}

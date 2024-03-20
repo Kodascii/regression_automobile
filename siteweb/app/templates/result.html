@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+    
+
+{% block content %}
+    <div class="result-container">
+        <h2>Form Submission Results</h2>
+        {% if form_data %}
+            {% for key, value in form_data.items() %}
+                <div class="result-item"><strong>{{ key }}:</strong> {{ value }}</div>
+            {% endfor %}
+        {% else %}
+            <p>No data to display.</p>
+        {% endif %}
+    </div>
+{% endblock %}
