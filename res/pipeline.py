@@ -5,6 +5,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.model_selection import GridSearchCV, KFold, train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 """ Pour utiliser ces méthodes, importer le fichier : 'from pipeline import pipeline_create'
@@ -28,16 +29,15 @@ import numpy as np
                 - entraîne et évalue le modèle avec kfold
                 - mesure le score mse, rmse et r2
                 
-                
+        ML_pipeline.make_graph([model_1, model_2, model_3]) : Pour créer le graphique comparant        
+        les scores de chaque modèle
                 
     Attributs utiles :
     
         self.mean_mse_score : Score MSE du modèle
         self.mean_rmse_score : Score RMSE du modèle
         self.mean_r2_score : Score R2 du modèle
-        self.best_params : Listes des paramètres optimaux choisis par GridSearchCV
-            
-        
+        self.best_params : Listes des paramètres optimaux choisis par GridSearchCV  
         
 """
 
@@ -129,7 +129,59 @@ class ML_pipeline:
         self.best_params = estimator_cv.best_params_
         
     def print_model_stats(self):
+        print(str(self.estimator))
         print(f"Mean MSE Score : {self.mean_mse_score}")
         print(f"Mean RMSE Score : {self.mean_rmse_score}")
         print(f"Mean R2 Score : {self.mean_r2_score}")
         print(f"Best GridSearch parameters : {self.best_params}")
+    
+    
+    
+    # Prend en entrée un tableau des objets ML_pipeline
+    def make_graph(models : list):
+        
+        # Instanciation des listes pour récupérer les scores de chaque modèles
+        rmse_scores =  [] 
+        mse_scores = [] 
+        r2_scores =  []
+        model_stats = []
+
+        
+        for model in models : 
+            rmse_scores.append(model.mean_rmse_score)
+            mse_scores.append(model.mean_mse_score)
+            r2_scores.append(model.mean_r2_score)
+            model_stats.append(model.print_model_stats())
+            
+            
+      # X-axis positions
+        x = np.arange(len(models))
+
+    #   Largeur des barres
+        width = 0.2
+
+        # Mise en graph des barres
+        plt.bar(x + width*2, r2_scores, width=width, label='R²')
+        plt.bar(x, rmse_scores, width=width, label='RMSE')
+        plt.bar(x + width, mse_scores, width=width, label='MSE')
+        
+
+        # Ajout labels et titre
+        plt.xlabel('Modèles')
+        plt.ylabel('Scores')
+        plt.title('Comparaison des modèles')
+
+        # Ajout des labels pour l'axe X en fonction du nom de l'estimateur
+        plt.xticks(x + width, [i.estimator for i in models])
+    
+        plt.legend()
+        
+        
+        
+        return (plt.show(), [i for i in model_stats])
+
+    
+
+
+
+        
