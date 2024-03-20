@@ -1,14 +1,23 @@
 from urllib.parse import urlsplit
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, session
 from flask_login import login_user, logout_user, current_user, login_required
 import sqlalchemy as sa
 from sqlalchemy.sql.expression import func
-import random
+from functools import wraps
+from flask import abort
 from app import app, db
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, PredictForm
 from app.models import User
-import numpy as np 
 
+
+
+def admin_required(func):
+    @wraps(func)
+    def decorated_view(*args, **kwargs):
+        if not current_user.is_authenticated or not current_user.isAdmin:
+            abort(403)  # Return a 403 Forbidden error if the user is not an admin
+        return func(*args, **kwargs)
+    return decorated_view
 
 
 @app.route('/')
@@ -19,8 +28,47 @@ def accueil():
 
 @app.route('/stats')
 @login_required
+@admin_required
 def stats():   
     return render_template('stats.html', title='Statistics')
+
+@app.route('/predict', methods=['GET', 'POST'])
+@login_required
+def predict():
+    form = PredictForm()
+    if form.validate_on_submit():
+        form_data = {
+            'Name': form.dropdown1.data,
+            'Location': form.dropdown2.data,
+            'Year': form.dropdown3.data,
+            'Fuel Type': form.dropdown4.data,
+            'Transmission': form.dropdown5.data,
+            'Owner Type': form.dropdown6.data,
+            'Kilometers': form.text_input1.data,
+            'Mileage': form.text_input2.data,
+            'Engine': form.text_input3.data,
+            'Power': form.text_input4.data,
+            'Seats': form.text_input5.data
+        }
+        session['form_data'] = form_data
+        return redirect(url_for('result'))
+    return render_template('predict.html', form=form)
+
+
+@app.route('/result')
+@login_required
+def result():
+    form_data = session.get('form_data', {})  # Retrieve form data from session
+    if not form_data:
+        flash('No form data found.', 'error')
+        return redirect(url_for('predict'))
+    
+    return render_template('result.html', form_data=form_data)
+
+@app.route('/joke')
+@login_required
+def joke():   
+    return render_template('joke.html', title='Joke')
 
 
 
@@ -63,3 +111,5 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
+from .plot_generator import init_plot
+init_plot()

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Nombre d&#39;entrées par Marque</title>
+    <style>
+      html, body {
+        box-sizing: border-box;
+        display: flow-root;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.4.0.min.js"></script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info");
+    </script>
+  </head>
+  <body>
+    <div id="f0806aa9-6b20-4122-8f03-254ccfe77da3" data-root-id="p1152" style="display: contents;"></div>
+  
+    <script type="application/json" id="c9885404-ad40-4532-a3cf-5b50175ee14c">
+      {"44d53618-5a3a-4221-ad87-aeaffab3abe0":{"version":"3.4.0","title":"Bokeh Application","roots":[{"type":"object","name":"Figure","id":"p1152","attributes":{"x_range":{"type":"object","name":"FactorRange","id":"p1162","attributes":{"factors":["Ambassador","Audi","BMW","Bentley","Chevrolet","Datsun","Fiat","Force","Ford","Honda","Hyundai","ISUZU","Isuzu","Jaguar","Jeep","Lamborghini","Land Rover","Mahindra","Maruti","Mercedes-Benz","Mini","Mitsubishi","Nissan","Porsche","Renault","Skoda","Smart","Tata","Toyota","Volkswagen","Volvo"]}},"y_range":{"type":"object","name":"DataRange1d","id":"p1154"},"x_scale":{"type":"object","name":"CategoricalScale","id":"p1163"},"y_scale":{"type":"object","name":"LinearScale","id":"p1164"},"title":{"type":"object","name":"Title","id":"p1155","attributes":{"text":"Nombre d'entr\u00e9es par Marque"}},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1192","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1149","attributes":{"selected":{"type":"object","name":"Selection","id":"p1150","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1151"},"data":{"type":"map","entries":[["index",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAARAAAAEgAAABMAAAAUAAAAFQAAABYAAAAXAAAAGAAAABkAAAAaAAAAGwAAABwAAAAdAAAAHgAAAA=="},"shape":[31],"dtype":"int32","order":"little"}],["Name",{"type":"ndarray","array":["Ambassador","Audi","BMW","Bentley","Chevrolet","Datsun","Fiat","Force","Ford","Honda","Hyundai","ISUZU","Isuzu","Jaguar","Jeep","Lamborghini","Land Rover","Mahindra","Maruti","Mercedes-Benz","Mini","Mitsubishi","Nissan","Porsche","Renault","Skoda","Smart","Tata","Toyota","Volkswagen","Volvo"],"shape":[31],"dtype":"object","order":"little"}],["Count",{"type":"ndarray","array":{"type":"bytes","data":"AQAAAOwAAAALAQAAAQAAAHkAAAANAAAAHAAAAAMAAAAsAQAAYAIAAFMEAAACAAAAAQAAACgAAAAPAAAAAQAAADwAAAAQAQAAuwQAAD4BAAAaAAAAGwAAAFsAAAASAAAAkQAAAK0AAAABAAAAugAAAJsBAAA7AQAAFQAAAA=="},"shape":[31],"dtype":"int32","order":"little"}],["colors",{"type":"ndarray","array":["#116151","#66cf4a","#63a2ba","#af1933","#b56ae7","#89825d","#52e84c","#e1a31f","#7f37fd","#e63e6d","#789fe8","#847bfb","#d2b1fa","#5f680e","#fdcdb0","#68eea1","#88c925","#e0ed50","#f844f2","#9a08ac","#646539","#c03bea","#30be39","#94a9c9","#d54e23","#57dcfb","#f1c075","#428d7d","#a5c2b2","#d1b713","#c91f43"],"shape":[31],"dtype":"object","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1193","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1194"}}},"glyph":{"type":"object","name":"VBar","id":"p1189","attributes":{"x":{"type":"field","field":"Name"},"width":{"type":"value","value":0.8},"top":{"type":"field","field":"Count"},"line_color":{"type":"value","value":"#1f77b4"},"fill_color":{"type":"field","field":"colors"}}},"nonselection_glyph":{"type":"object","name":"VBar","id":"p1190","attributes":{"x":{"type":"field","field":"Name"},"width":{"type":"value","value":0.8},"top":{"type":"field","field":"Count"},"line_color":{"type":"value","value":"#1f77b4"},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"field","field":"colors"},"fill_alpha":{"type":"value","value":0.1},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"VBar","id":"p1191","attributes":{"x":{"type":"field","field":"Name"},"width":{"type":"value","value":0.8},"top":{"type":"field","field":"Count"},"line_color":{"type":"value","value":"#1f77b4"},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"field","field":"colors"},"fill_alpha":{"type":"value","value":0.2},"hatch_alpha":{"type":"value","value":0.2}}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1161","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1175"},{"type":"object","name":"WheelZoomTool","id":"p1176","attributes":{"renderers":"auto"}},{"type":"object","name":"BoxZoomTool","id":"p1177","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1178","attributes":{"syncable":false,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5}}}},{"type":"object","name":"SaveTool","id":"p1183"},{"type":"object","name":"ResetTool","id":"p1184"},{"type":"object","name":"HelpTool","id":"p1185"}]}},"left":[{"type":"object","name":"LinearAxis","id":"p1170","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1171","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"NumeralTickFormatter","id":"p1195"},"axis_label":"Nombre d'entr\u00e9es","major_label_policy":{"type":"object","name":"AllLabels","id":"p1173"}}}],"below":[{"type":"object","name":"CategoricalAxis","id":"p1165","attributes":{"ticker":{"type":"object","name":"CategoricalTicker","id":"p1166"},"formatter":{"type":"object","name":"CategoricalTickFormatter","id":"p1167"},"axis_label":"Marque","major_label_orientation":1.5707963267948966,"major_label_policy":{"type":"object","name":"AllLabels","id":"p1168"}}}],"center":[{"type":"object","name":"Grid","id":"p1169","attributes":{"axis":{"id":"p1165"}}},{"type":"object","name":"Grid","id":"p1174","attributes":{"dimension":1,"axis":{"id":"p1170"}}}]}}]}}
+    </script>
+    <script type="text/javascript">
+      (function() {
+        const fn = function() {
+          Bokeh.safely(function() {
+            (function(root) {
+              function embed_document(root) {
+              const docs_json = document.getElementById('c9885404-ad40-4532-a3cf-5b50175ee14c').textContent;
+              const render_items = [{"docid":"44d53618-5a3a-4221-ad87-aeaffab3abe0","roots":{"p1152":"f0806aa9-6b20-4122-8f03-254ccfe77da3"},"root_ids":["p1152"]}];
+              root.Bokeh.embed.embed_items(docs_json, render_items);
+              }
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+              } else {
+                let attempts = 0;
+                const timer = setInterval(function(root) {
+                  if (root.Bokeh !== undefined) {
+                    clearInterval(timer);
+                    embed_document(root);
+                  } else {
+                    attempts++;
+                    if (attempts > 100) {
+                      clearInterval(timer);
+                      console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                    }
+                  }
+                }, 10, root)
+              }
+            })(window);
+          });
+        };
+        if (document.readyState != "loading") fn();
+        else document.addEventListener("DOMContentLoaded", fn);
+      })();
+    </script>
+  </body>
+</html>
