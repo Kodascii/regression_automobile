@@ -1,13 +1,20 @@
 <!doctype html>
 <html>
     <head>
+
         <link rel="stylesheet" href="../static/css/main.css">
         <link rel="stylesheet" href="../static/css/selection.css">
         <link rel="stylesheet" href="../static/css/accueil.css">
         <script src="https://use.fontawesome.com/470b91f216.js"></script>
         <script src="./static/js/jquery/jquery.min.js" charset="utf-8"></script>
+        
     {% if request.path.startswith('/predict/') %}
-        <link rel="stylesheet" href="../static/css/predict.css">    
+        <link rel="stylesheet" href="../static/css/predict.css">
+    {%elif request.path.startswith('/stats') %}
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.4.0.min.js"></script>
+            <script type="text/javascript">
+                Bokeh.set_log_level("info");
+            </script>
     {% endif %}
         
     </head>
@@ -19,10 +26,14 @@
                 </div>
                 <div>
                     <a class="selectA marginLeft" href="{{ url_for('accueil') }}">Accueil</a>
+
+                    {% if current_user.isAdmin %}
+                    <a class="selectA marginLeft" href="{{ url_for('stats') }}">Stats</a>
+                    {% endif %}
+
                     {% if current_user.is_anonymous  %}
                     <a class="selectA marginLeft" href="{{ url_for('login') }}">Login</a>
                     {% else %}
-                    <a class="selectA marginLeft" href="{{ url_for('stats') }}">Stats</a>
                     <a class="selectA marginLeft" href="{{ url_for('logout') }}">Logout</a>
                     {% endif %}
                 </div>

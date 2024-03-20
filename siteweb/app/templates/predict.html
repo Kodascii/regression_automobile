@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+    
+
+{% block content %}
+<div class="form">
+    <div class="tab-content">
+      <div id="signup">   
+        <h1 class="white h1title">Redigir Votre Voiture</h1>
+        
+        <form class="form" action="" method="post" novalidate>
+          {{ form.hidden_tag() }}
+          
+          <!-- Dropdown Fields -->
+          <div class ="grouped-fields">
+            <div class="field-wrap">
+                <label>Marque<span class="req">*</span></label>
+                {{ form.dropdown1() }}<br>
+            </div>
+      
+            <div class="field-wrap">
+                <label>Localisation<span class="req">*</span></label>
+                {{ form.dropdown2() }}<br>
+            </div>
+
+          </div>
+          
+          <div class ="grouped-fields">
+            <div class="field-wrap">
+                <label>Anne<span class="req">*</span></label>
+                {{ form.dropdown3() }}<br>
+              </div>
+      
+              <div class="field-wrap">
+                <label>Type de Carburant<span class="req">*</span></label>
+                {{ form.dropdown4() }}<br>
+              </div>
+          </div>
+          
+          <div class ="grouped-fields">
+            <div class="field-wrap">
+                <label>Transmission<span class="req">*</span></label>
+                {{ form.dropdown5() }}<br>
+            </div>
+    
+            <div class="field-wrap">
+                <label>Nombre de Propritere<span class="req">*</span></label>
+                {{ form.dropdown6() }}<br>
+            </div>
+        </div>
+          
+          <!-- Text Input Fields -->
+          <div class="field-wrap">
+            <label>Nombres de Kilometres<span class="req">*</span></label>
+            {{ form.text_input1(size=32) }}<br>
+            {% for error in form.text_input1.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+  
+          <div class="field-wrap">
+            <label>Kilometers par Litre<span class="req">*</span></label>
+            {{ form.text_input2(size=32) }}<br>
+            {% for error in form.text_input2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+  
+          <div class="field-wrap">
+            <label>Taille du Moteur<span class="req">*</span></label>
+            {{ form.text_input3(size=32) }}<br>
+            {% for error in form.text_input3.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+  
+          <div class="field-wrap">
+            <label>Puissance Moteur<span class="req">*</span></label>
+            {{ form.text_input4(size=32) }}<br>
+            {% for error in form.text_input4.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+  
+          <div class="field-wrap">
+            <label>Nombre de Chaise<span class="req">*</span></label>
+            {{ form.text_input5(size=32) }}<br>
+            {% for error in form.text_input5.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+  
+          <input id="submit" name="submit" class="button button-block" type="submit" value="Submit">
+        </form>
+      </div>
+    </div>    
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Number of Vehicles by Fuel Type</title>
+    <style>
+      html, body {
+        box-sizing: border-box;
+        display: flow-root;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.4.0.min.js"></script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info");
+    </script>
+  </head>
+  <body>
+    <div id="a7e9bd4e-3831-47b1-b69f-c009112684ab" data-root-id="p1201" style="display: contents;"></div>
+  
+    <script type="application/json" id="e64a0342-7546-4432-8f7d-034eb637ab01">
+      {"87e347c4-f4ff-485c-bf9d-7b7f90ccaf49":{"version":"3.4.0","title":"Bokeh Application","roots":[{"type":"object","name":"Figure","id":"p1201","attributes":{"x_range":{"type":"object","name":"FactorRange","id":"p1211","attributes":{"factors":["CNG","Diesel","Electric","LPG","Petrol"]}},"y_range":{"type":"object","name":"DataRange1d","id":"p1203"},"x_scale":{"type":"object","name":"CategoricalScale","id":"p1212"},"y_scale":{"type":"object","name":"LinearScale","id":"p1213"},"title":{"type":"object","name":"Title","id":"p1204","attributes":{"text":"Number of Vehicles by Fuel Type"}},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1241","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1198","attributes":{"selected":{"type":"object","name":"Selection","id":"p1199","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1200"},"data":{"type":"map","entries":[["index",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAEAAAACAAAAAwAAAAQAAAA="},"shape":[5],"dtype":"int32","order":"little"}],["Fuel_Type",{"type":"ndarray","array":["CNG","Diesel","Electric","LPG","Petrol"],"shape":[5],"dtype":"object","order":"little"}],["Count",{"type":"ndarray","array":{"type":"bytes","data":"OAAAAIUMAAACAAAACgAAALoKAAA="},"shape":[5],"dtype":"int32","order":"little"}],["colors",{"type":"ndarray","array":["#a1bca5","#9b0a95","#1e9b13","#6d3783","#ce3bd9"],"shape":[5],"dtype":"object","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1242","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1243"}}},"glyph":{"type":"object","name":"VBar","id":"p1238","attributes":{"x":{"type":"field","field":"Fuel_Type"},"width":{"type":"value","value":0.8},"top":{"type":"field","field":"Count"},"line_color":{"type":"value","value":"#1f77b4"},"fill_color":{"type":"field","field":"colors"}}},"nonselection_glyph":{"type":"object","name":"VBar","id":"p1239","attributes":{"x":{"type":"field","field":"Fuel_Type"},"width":{"type":"value","value":0.8},"top":{"type":"field","field":"Count"},"line_color":{"type":"value","value":"#1f77b4"},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"field","field":"colors"},"fill_alpha":{"type":"value","value":0.1},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"VBar","id":"p1240","attributes":{"x":{"type":"field","field":"Fuel_Type"},"width":{"type":"value","value":0.8},"top":{"type":"field","field":"Count"},"line_color":{"type":"value","value":"#1f77b4"},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"field","field":"colors"},"fill_alpha":{"type":"value","value":0.2},"hatch_alpha":{"type":"value","value":0.2}}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1210","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1224"},{"type":"object","name":"WheelZoomTool","id":"p1225","attributes":{"renderers":"auto"}},{"type":"object","name":"BoxZoomTool","id":"p1226","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1227","attributes":{"syncable":false,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5}}}},{"type":"object","name":"SaveTool","id":"p1232"},{"type":"object","name":"ResetTool","id":"p1233"},{"type":"object","name":"HelpTool","id":"p1234"}]}},"left":[{"type":"object","name":"LinearAxis","id":"p1219","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1220","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"NumeralTickFormatter","id":"p1244"},"axis_label":"Number of Vehicles","major_label_policy":{"type":"object","name":"AllLabels","id":"p1222"}}}],"below":[{"type":"object","name":"CategoricalAxis","id":"p1214","attributes":{"ticker":{"type":"object","name":"CategoricalTicker","id":"p1215"},"formatter":{"type":"object","name":"CategoricalTickFormatter","id":"p1216"},"axis_label":"Fuel Type","major_label_orientation":1.5707963267948966,"major_label_policy":{"type":"object","name":"AllLabels","id":"p1217"}}}],"center":[{"type":"object","name":"Grid","id":"p1218","attributes":{"axis":{"id":"p1214"}}},{"type":"object","name":"Grid","id":"p1223","attributes":{"dimension":1,"axis":{"id":"p1219"}}}]}}]}}
+    </script>
+    <script type="text/javascript">
+      (function() {
+        const fn = function() {
+          Bokeh.safely(function() {
+            (function(root) {
+              function embed_document(root) {
+              const docs_json = document.getElementById('e64a0342-7546-4432-8f7d-034eb637ab01').textContent;
+              const render_items = [{"docid":"87e347c4-f4ff-485c-bf9d-7b7f90ccaf49","roots":{"p1201":"a7e9bd4e-3831-47b1-b69f-c009112684ab"},"root_ids":["p1201"]}];
+              root.Bokeh.embed.embed_items(docs_json, render_items);
+              }
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+              } else {
+                let attempts = 0;
+                const timer = setInterval(function(root) {
+                  if (root.Bokeh !== undefined) {
+                    clearInterval(timer);
+                    embed_document(root);
+                  } else {
+                    attempts++;
+                    if (attempts > 100) {
+                      clearInterval(timer);
+                      console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                    }
+                  }
+                }, 10, root)
+              }
+            })(window);
+          });
+        };
+        if (document.readyState != "loading") fn();
+        else document.addEventListener("DOMContentLoaded", fn);
+      })();
+    </script>
+  </body>
+</html>
