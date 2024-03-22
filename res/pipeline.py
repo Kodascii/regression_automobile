@@ -2,7 +2,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from sklearn.model_selection import GridSearchCV, KFold, train_test_split
+from sklearn.model_selection import GridSearchCV, KFold, learning_curve
 from sklearn.metrics import r2_score, mean_squared_error
 import numpy as np
 import matplotlib.pyplot as plt
@@ -179,6 +179,7 @@ class ML_pipeline:
         
         
         return (plt.show(), [i for i in model_stats])
+    
 
     
 
