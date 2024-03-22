@@ -1,24 +1,37 @@
 {% extends "base.html" %}
-    <link rel="stylesheet" href="../static/css/result.css">
 
 {% block content %}
-<div class="result-container">
-    <h2>Submitted Data</h2>
-    {% if form_data %}
-        {% for key, value in form_data.items() %}
-            <div class="result-item"><strong>{{ key }}:</strong> {{ value }}</div>
-        {% endfor %}
-    {% else %}
-        <p>No data to display.</p>
-    {% endif %}
-</div>
+<div class="content-container">
+    <div class="result-container">
+        <h2>Submitted Data</h2>
+        {% if form_data %}
+           {% set item_list = form_data.items() | list %}
+           <!-- Adjust loop to handle 4 items at a time -->
+           {% for i in range((item_list | length + 3) // 4) %}
+               <div class="pair-row">
+                   <!-- Adjust slicing to get 4 items -->
+                   {% set quad = item_list[i*4 : i*4+4] %}
+                   {% for key, value in quad %}
+                       <div class="result-item"><strong>{{ key }}:</strong> {{ value }}</div>
+                       <!-- Check if we need to insert a break to visually separate pairs -->
+                       {% if loop.index is even and not loop.last %}
+                           </div><div class="pair-row">
+                       {% endif %}
+                   {% endfor %}
+               </div>
+           {% endfor %}
+        {% else %}
+            <p>No data to display.</p>
+        {% endif %}
+    </div>
 
-<div class="result-container">
-    <h2>Prediction Result</h2>
-    {% if prediction %}
-        <div class="result-item"><strong>Prediction:</strong> {{ prediction }}</div>
-    {% else %}
-        <p>No prediction result to display.</p>
-    {% endif %}
+    <div class="result-container">
+        <h2>Prediction Result</h2>
+        {% if prediction %}
+            <div class="result-item prediction-value"><strong>Prediction:</strong> {{ prediction }}</div>
+        {% else %}
+            <p>No prediction result to display.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

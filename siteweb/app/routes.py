@@ -9,6 +9,7 @@ from app import app, db
 from app.forms import LoginForm, RegistrationForm, PredictForm
 from app.models import User
 import requests
+from currency_converter import CurrencyConverter
 
 
 
@@ -110,6 +111,14 @@ def result():
     except requests.exceptions.RequestException as e:
         flash(f"Error calling prediction API: {e}", 'error')
         return redirect(url_for('predict'))
+    
+
+    # convert from lakh to Indian Roupees to Euros
+    cc = CurrencyConverter()
+    lakh = 100000
+    inr_value = prediction_result['prediction'][0] * lakh
+    eur_value = round(cc.convert(inr_value, 'INR', 'EUR'), 2)
+    prediction_result = eur_value
 
     return render_template('result.html', prediction=prediction_result, form_data=form_data)
 
