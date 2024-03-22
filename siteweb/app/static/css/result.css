@@ -1,0 +1,35 @@
+.result-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc; /* Light grey border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light grey background */
+}
+
+h2 {
+    color: #333; /* Dark grey color for the heading */
+    border-bottom: 2px solid #333; /* Dark grey bottom border for the heading */
+    padding-bottom: 10px; /* Spacing below the heading */
+    margin-bottom: 20px; /* Spacing below the heading */
+}
+
+.result-item {
+    margin: 10px 0; /* Margin above and below each item */
+    padding: 10px; /* Padding inside each item */
+    border: 1px solid #ddd; /* Light grey border */
+    border-radius: 3px; /* Slightly rounded corners for the items */
+    background-color: #fff; /* White background for items */
+}
+
+.result-item strong {
+    color: #000; /* Black color for the key */
+    margin-right: 5px; /* Spacing after the key */
+}
+
+/* Optional: Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .result-container {
+        margin: 10px;
+        padding: 10px;
+    }
+}

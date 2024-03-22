@@ -1,15 +1,24 @@
 {% extends "base.html" %}
-    
+    <link rel="stylesheet" href="../static/css/result.css">
 
 {% block content %}
-    <div class="result-container">
-        <h2>Form Submission Results</h2>
-        {% if form_data %}
-            {% for key, value in form_data.items() %}
-                <div class="result-item"><strong>{{ key }}:</strong> {{ value }}</div>
-            {% endfor %}
-        {% else %}
-            <p>No data to display.</p>
-        {% endif %}
-    </div>
+<div class="result-container">
+    <h2>Submitted Data</h2>
+    {% if form_data %}
+        {% for key, value in form_data.items() %}
+            <div class="result-item"><strong>{{ key }}:</strong> {{ value }}</div>
+        {% endfor %}
+    {% else %}
+        <p>No data to display.</p>
+    {% endif %}
+</div>
+
+<div class="result-container">
+    <h2>Prediction Result</h2>
+    {% if prediction %}
+        <div class="result-item"><strong>Prediction:</strong> {{ prediction }}</div>
+    {% else %}
+        <p>No prediction result to display.</p>
+    {% endif %}
+</div>
 {% endblock %}
