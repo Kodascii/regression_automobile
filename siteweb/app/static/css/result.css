@@ -1,35 +1,83 @@
-.result-container {
+/* Add a Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.content-container {
+    display: flex;
+    justify-content: space-around; /* Centers containers with space around them */
     margin: 20px;
-    padding: 20px;
-    border: 1px solid #ccc; /* Light grey border */
-    border-radius: 5px; /* Rounded corners */
-    background-color: #f9f9f9; /* Light grey background */
+    flex-wrap: wrap; /* Allows containers to wrap on smaller screens */
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
 }
 
-h2 {
-    color: #333; /* Dark grey color for the heading */
-    border-bottom: 2px solid #333; /* Dark grey bottom border for the heading */
-    padding-bottom: 10px; /* Spacing below the heading */
-    margin-bottom: 20px; /* Spacing below the heading */
+.result-container {
+    flex: 0 0 45%; /* Adjusts the width and grow-shrink basis */
+    padding: 20px;
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effect */
+}
+
+.result-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.result-container h2 {
+    color: #333;
+    margin: 0 0 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #325a75; /* Adds a pop of color */
+}
+
+/* Style for the pair-row to ensure pairs are displayed side by side */
+.pair-row {
+    display: flex;
+    justify-content: space-between; /* Spaces out the pairs evenly */
+    flex-wrap: wrap; /* Allows pairs to wrap on smaller screens */
+    margin-bottom: 20px; /* Adds bottom margin for spacing between rows */
 }
 
 .result-item {
-    margin: 10px 0; /* Margin above and below each item */
-    padding: 10px; /* Padding inside each item */
-    border: 1px solid #ddd; /* Light grey border */
-    border-radius: 3px; /* Slightly rounded corners for the items */
-    background-color: #fff; /* White background for items */
+    flex: 1 1 48%; /* Adjusts to take roughly half of the container's width */
+    padding: 10px;
+    background-color: #f9f9f9; /* Slightly different background to distinguish items */
+    border-radius: 5px; /* Rounded corners for items */
+    margin-bottom: 10px; /* Margin bottom for spacing between items */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .result-item strong {
-    color: #000; /* Black color for the key */
-    margin-right: 5px; /* Spacing after the key */
+    color: #325a75; /* A touch of color for the item titles */
+    margin-right: 10px;
 }
 
-/* Optional: Responsive design for smaller screens */
+/* Specific style for the Prediction value */
+.result-item.prediction-value {
+    font-size: 1.5em; /* Larger font size for the prediction value */
+    color: #2cad3f; /* A vibrant color for emphasis */
+    font-weight: 700; /* Bold font weight */
+    flex-basis: 100%; /* Ensures prediction takes full width */
+}
+
 @media (max-width: 768px) {
+    .content-container {
+        flex-direction: column;
+    }
+
     .result-container {
-        margin: 10px;
-        padding: 10px;
+        flex: 0 0 auto; /* Full width on small screens */
+    }
+
+    .pair-row {
+        flex-direction: column;
+    }
+
+    .result-item {
+        flex-basis: 100%; /* Each item takes full width on smaller screens */
     }
 }
